@@ -568,7 +568,9 @@ def makeRingWingStrut():
         createSupressHoles(sh["Shell_{0}".format(shellCounter-1)])
         
         createMultiRotation(sp["SupressHoles_{0}".format(supressHolesCounter-1)]\
-        ,showInStudy=True,name="Ringwing_Strut"+str(k+1))
+        ,showInStudy=True,name="Ringwing_Strut_"+str(k+1))
+        
+        geompy.Rotate(mr["Multi_Rotation_{0}".format(multiRotationCounter-1)], OX, 45*math.pi/180.0)
         
 
 def main():
