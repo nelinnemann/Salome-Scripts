@@ -95,7 +95,7 @@ def createCurve(start,end,showInStudy=False):
     global curveCounter
     vertexList=[]
     od = collections.OrderedDict(sorted(v.items()))
-    for x in xrange(start,end):
+    for x in range(start,end):
         vertexList.append(od["Vertex_{0}".format(x)])
     c["Curve_{0}".format(curveCounter)] = geompy.MakeInterpol(vertexList, False, False)
     if showInStudy==True:
@@ -123,7 +123,7 @@ def createFilling(start,end,showInStudy=False):
     global compoundCounter
     curveList=[]
     od = collections.OrderedDict(sorted(c.items()))
-    for x in xrange(start,end):
+    for x in range(start,end):
         curveList.append(od["Curve_{0}".format(x)])
     co["Compound_{0}".format(compoundCounter)] = geompy.MakeCompound(curveList)
     fi["Filling_{0}".format(compoundCounter)] = geompy.MakeFilling(co["Compound_{0}".format(compoundCounter)], theMinDeg=3, theMaxDeg=6, theNbIter=1)
@@ -323,7 +323,7 @@ def makeSailCap():
             ylist.append(y)
             zlist.append(z)
     
-    for i in xrange(0,10):
+    for i in range(0,10):
         listStart=vertCounter
         counter=i
 
@@ -382,7 +382,7 @@ def makeSternAppendage():
     
     for nu,h in enumerate(H):
         curveListStart = curveCounter
-        for i in xrange(1,31):
+        for i in range(1,31):
             CY=-0.466308*RR+0.88859
             listStart=vertCounter
             for j in XXI:
@@ -435,7 +435,7 @@ def makeRingWing():
     ,0.00080,0.00006,-0.00027,-0.00033,0.00005\
     ,0.00014,0.00008]
     
-    for i in xrange(1,27):
+    for i in range(1,27):
         X=XC[i]
         D=0.4-X
         E=1.0-X
@@ -454,7 +454,7 @@ def makeRingWing():
         +0.02995253*(math.log(X)+0.4689244)
         YCP.append(ycpVal1)
     
-    for i in xrange(1,27):
+    for i in range(1,27):
         X=XC[i]
         
         if i >= 16:
@@ -467,14 +467,14 @@ def makeRingWing():
         else:
             OM=math.acos(2.0*X-1.)
             YY=0.
-            for j in xrange(1,18):
+            for j in range(1,18):
 #                print j
                 YY=YY+(B[j]*math.sin(j*OM))
 #            print YY
 #            print YY*0.1
             YT.append(YY*0.1)
     
-    for i in xrange(2,27):
+    for i in range(2,27):
         TH=math.atan(YCP[i])
 #        print "TH =",math.degrees(TH)
         SINTH=math.sin(TH)
@@ -487,13 +487,13 @@ def makeRingWing():
         YL.append(YC[i]-YT[i]*COSTH)
     
     
-    for k in xrange(0,2):
+    for k in range(0,2):
         PHI=math.atan2((YDTE[k]-YDLE[k]),(XDTE[k]-XDLE[k]))
         CS=math.cos(PHI)
         SN=math.sin(PHI)
         CHORD=math.sqrt((YDTE[k]-YDLE[k])**2+(XDTE[k]-XDLE[k])**2)
         listStart=vertCounter
-        for i in xrange(1,27):
+        for i in range(1,27):
             x=XDLE[k]+(CHORD*(XU[i]*CS-YU[i]*SN))
             y=YDLE[k]+(CHORD*(XU[i]*SN+YU[i]*CS))
             createPoint(x,y,0)
@@ -503,7 +503,7 @@ def makeRingWing():
         createRevolution(c["Curve_{0}".format(curveCounter-1)])
         
         listStart=vertCounter
-        for i in xrange(1,27):
+        for i in range(1,27):
 #            XLL=XL[i]
             x=XDLE[k]+(CHORD*(XL[i]*CS-YL[i]*SN))
             y=YDLE[k]+(CHORD*(XL[i]*SN+YL[i]*CS))
@@ -539,16 +539,16 @@ def makeRingWingStrut():
     ,0.075,0.1,0.15,0.2,0.25,0.3\
     ,0.4,0.5,0.6,0.7,0.8,0.9,1.]
 
-    for k in xrange(0,2):
+    for k in range(0,2):
         R1=YHLE
         R2=YDLE[k]
         DELR=(R2-R1)/9.
         R=R2+DELR*2.
         curveListStart = curveCounter
-        for l in xrange(1,14):
+        for l in range(1,14):
             X0=0.223221*R+13.556128
             listStart=vertCounter
-            for i in xrange(1,len(XC)):
+            for i in range(1,len(XC)):
                 XI = XC[i]
                 x=(X0+0.243995*XI)
                 y=(R-0.054465*XI)
